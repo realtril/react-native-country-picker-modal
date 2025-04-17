@@ -1,22 +1,42 @@
 {
   "expo": {
-    "name": "country-picker-example",
-    "description": "Expo Country Picker Example",
-    "slug": "country-picker-example",
-    "privacy": "public",
-    "sdkVersion": "49.0.0",
-    "platforms": ["ios", "android", "web"],
+    "name": "react-native-country-picker-modal-realtril",
+    "slug": "react-native-country-picker-modal-realtril",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/images/icon.png",
-    "splash": {
-      "image": "./src/assets/images/splash.png"
-    },
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.react-native-country-picker-modal-realtril"
     },
-    "androidStatusBar": {
-      "backgroundColor": "#000000"
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
     }
   }
 }
