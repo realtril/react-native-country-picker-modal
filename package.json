@@ -1,117 +1,67 @@
 {
-  "name": "react-native-country-picker-modal",
-  "version": "2.0.0",
-  "description": "react-native country picker",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xcarpentier/react-native-country-picker-modal.git"
-  },
+  "name": "@realtril/react-native-country-picker-modal",
+  "main": "src/index.tsx",
+  "types": "src/index.tsx",
+  "version": "1.0.6",
   "scripts": {
-    "start": "yarn config:dev && expo start",
-    "start:web": "yarn config:dev && expo start -w --dev",
-    "tsc": "node_modules/.bin/tsc --noEmit",
-    "build": "rm -rf lib/ && node_modules/.bin/tsc && mkdir ./lib && cp -rf ./src/assets ./lib/assets && yarn minify",
-    "minify": "yarn minify:emoji",
-    "minify:emoji": "./scripts/minify.js ./lib/assets/data/countries-emoji.json",
-    "config:dev": "json -I -f package.json -e 'this.main=\"node_modules/expo/AppEntry.js\"'",
-    "config:npm": "json -I -f package.json -e 'this.main=\"lib/index.js\"'",
-    "lint": "eslint .",
-    "test": "TZ=Europe/Paris jest",
-    "data:image": "rm -rf ./data/countries.json && ./scripts/transform-world-countries.js > ./data/countries.json",
-    "data:emoji": "rm -rf ./data/countries-emoji.json && ./scripts/transform-world-countries.js --emoji > ./data/countries-emoji.json",
-    "data:cca2": "rm -rf ./data/cca2.json && ./scripts/transform-world-countries.js --cca2 > ./data/cca2.json",
-    "data:regions": "rm -rf ./data/cca2.json && ./scripts/transform-world-countries.js --regions > ./data/regions.json",
-    "data:subregions": "rm -rf ./data/cca2.json && ./scripts/transform-world-countries.js --subregions > ./data/subregions.json",
-    "cleaning": "rm -rf node_modules && rm -f yarn.lock && yarn cache clean && yarn install && watchman watch-del-all && rm -fr $TMPDIR/react-*",
-    "verify": "yarn lint && yarn build && yarn test",
-    "prepublishOnly": "yarn verify && yarn config:npm",
-    "postpublish": "yarn config:dev",
-    "deploy": "gh-pages -d web-build",
-    "predeploy": "yarn verify && expo build:web && mkdir web-build/countries && cp ./data/countries.json web-build/countries/index.json"
-  },
-  "keywords": [
-    "react-native",
-    "components",
-    "country-picker",
-    "country",
-    "flag"
-  ],
-  "author": "Xavier Carpentier <xcapetir@gmail.com> (https://xaviercarpentier.com/)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/xcarpentier/react-native-country-picker-modal/issues"
-  },
-  "homepage": "http://xcarpentier.github.io/react-native-country-picker-modal",
-  "dependencies": {
-    "@callstack/react-theme-provider": "3.0.9",
-    "fuse.js": "3.4.5",
-    "node-emoji": "1.11.0",
-    "react-async-hook": "4.0.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.23.0",
-    "@babel/eslint-parser": "^7.22.15",
-    "@babel/preset-env": "^7.22.20",
-    "@types/jest": "29.5.5",
-    "@types/node-emoji": "1.8.2",
-    "@types/react": "18.2.24",
-    "@types/react-native": "0.72.3",
-    "@types/react-test-renderer": "18.0.3",
-    "@typescript-eslint/eslint-plugin": "^6.7.4",
-    "@typescript-eslint/parser": "^6.7.4",
-    "babel-cli": "6.26.0",
-    "babel-jest": "29.7.0",
-    "babel-preset-expo": "^9.5.2",
-    "eslint": "^8.50.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-jsdoc": "^46.8.2",
-    "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-react": "^7.33.2",
-    "expo": "^49.0.13",
-    "gh-pages": "6.0.0",
-    "husky": "^8.0.3",
-    "jest": "^29.7.0",
-    "jest-expo": "^49.0.0",
-    "json": "^11.0.0",
-    "prettier": "3.0.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-native": "0.72.5",
-    "react-native-web": "^0.19.9",
-    "react-test-renderer": "18.2.0",
-    "typescript": "5.2.2",
-    "world-countries": "5.0.0"
+    "start": "expo start",
+    "reset-project": "node ./scripts/reset-project.js",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "test": "jest --watchAll",
+    "lint": "expo lint",
+    "data:image": "rm -rf ./src/assets/data/countries.json && node ./scripts/transform-world-countries.js > ./src/assets/data/countries.json",
+    "data:emoji": "rm -rf ./src/assets/data/countries-emoji.json && node ./scripts/transform-world-countries.js --emoji > ./src/assets/data/countries-emoji.json",
+    "data:cca2": "rm -rf ./src/assets/data/cca2.json && node ./scripts/transform-world-countries.js --cca2 > ./src/assets/data/cca2.json",
+    "data:regions": "rm -rf ./src/assets/data/regions.json && node ./scripts/transform-world-countries.js --regions > ./src/assets/data/regions.json",
+    "data:subregions": "rm -rf ./src/assets/data/subregions.json && node ./scripts/transform-world-countries.js --subregions > ./src/assets/data/subregions.json"
   },
   "jest": {
-    "preset": "react-native",
-    "testEnvironment": "jsdom",
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json",
-      "ts",
-      "tsx"
-    ],
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
-    },
-    "testMatch": [
-      "**/*.test.ts?(x)"
-    ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/example-expo",
-      "<rootDir>/example-slack-message"
-    ]
+    "preset": "jest-expo"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint && yarn tsc"
-    }
+  "dependencies": {
+    "@callstack/react-theme-provider": "^3.0.9",
+    "@expo/vector-icons": "^14.0.2",
+    "@react-navigation/bottom-tabs": "^7.2.0",
+    "@react-navigation/native": "^7.0.14",
+    "@realtril/react-native-country-picker-modal": "./",
+    "expo": "~52.0.46",
+    "expo-blur": "~14.0.3",
+    "expo-constants": "~17.0.8",
+    "expo-font": "~13.0.4",
+    "expo-haptics": "~14.0.1",
+    "expo-linking": "~7.0.5",
+    "expo-router": "~4.0.20",
+    "expo-splash-screen": "~0.29.24",
+    "expo-status-bar": "~2.0.1",
+    "expo-symbols": "~0.2.2",
+    "expo-system-ui": "~4.0.9",
+    "expo-web-browser": "~14.0.2",
+    "fuse.js": "^3.4.5",
+    "node-emoji": "^1.11.0",
+    "react": "18.3.1",
+    "react-async-hook": "^4.0.0",
+    "react-dom": "18.3.1",
+    "react-native": "0.76.9",
+    "react-native-gesture-handler": "~2.20.2",
+    "react-native-reanimated": "~3.16.1",
+    "react-native-safe-area-context": "4.12.0",
+    "react-native-screens": "~4.4.0",
+    "react-native-web": "~0.19.13",
+    "react-native-webview": "13.12.5",
+    "world-countries": "^5.0.0"
   },
-  "resolutions": {
-    "mem": "^4.0.0"
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@types/jest": "^29.5.12",
+    "@types/node-emoji": "^1.8.2",
+    "@types/react": "~18.3.12",
+    "@types/react-test-renderer": "^18.3.0",
+    "husky": "^9.1.7",
+    "jest": "^29.2.1",
+    "jest-expo": "~52.0.6",
+    "react-test-renderer": "18.3.1",
+    "typescript": "^5.3.3"
   }
 }

@@ -322,6 +322,7 @@ export const TranslationLanguageCodeList = [
   'fin',
   'zho',
   'isr',
+  'uk'
 ] as const
 export type TranslationLanguageCode =
   (typeof TranslationLanguageCodeList)[number]
@@ -336,4 +337,15 @@ export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 // type guards
 export const isCountryCode = (str: string): str is CountryCode => {
   return CountryCodeList.some((code) => code === str)
+}
+
+export interface Props {
+  placeholder?: string;
+  countryCode: CountryCode;
+  region?: Region;
+  subregion?: Subregion;
+  countryCodes?: CountryCode[];
+  excludeCountries?: CountryCode[];
+  includeCountries?: CountryCode[];
+  preferredCountries?: CountryCode[];
 }

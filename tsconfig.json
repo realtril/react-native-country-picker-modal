@@ -1,48 +1,24 @@
 {
-  "include": [
-    "src",
-    "App.tsx",
-    "./typings.d.ts"
-  ],
+  "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "declaration": true,
-    "outDir": "./lib",
     "strict": true,
-    "removeComments": true,
-    "jsx": "react",
-    "target": "es2019",
-    "module": "es6",
+    "baseUrl": ".",
+    "declaration": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "experimentalDecorators": true,
-    "preserveConstEnums": true,
-    "sourceMap": true,
-    "strictNullChecks": true,
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "importHelpers": false,
-    "alwaysStrict": true,
-    "forceConsistentCasingInFileNames": true,
-    "strictFunctionTypes": true,
-    "resolveJsonModule": true,
-    "noFallthroughCasesInSwitch": true,
-    "strictPropertyInitialization": false,
-    "lib": [
-      "dom",
-      "esnext"
-    ],
-    "typeRoots": [
-      "./node_modules/@types",
-      "./@types"
-    ]
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@realtril/react-native-country-picker-modal": ["./src/index.tsx"]
+    }
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "extends": "expo/tsconfig.base"
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "app.d.ts"
+  ]
 }

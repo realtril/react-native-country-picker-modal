@@ -18,7 +18,11 @@ const styles = StyleSheet.create({
 
 export type CountryFilterProps = TextInputProps
 
-export const CountryFilter = (props: CountryFilterProps) => {
+export const CountryFilter = ({ 
+  autoFocus = false, 
+  placeholder = 'Select a country',
+  ...props 
+}: CountryFilterProps) => {
   const {
     filterPlaceholderTextColor,
     fontFamily,
@@ -34,12 +38,9 @@ export const CountryFilter = (props: CountryFilterProps) => {
         styles.input,
         { fontFamily, fontSize, color: onBackgroundTextColor },
       ]}
+      autoFocus={autoFocus}
+      placeholder={placeholder}
       {...props}
     />
   )
-}
-
-CountryFilter.defaultProps = {
-  autoFocus: false,
-  placeholder: 'Enter country name',
 }
