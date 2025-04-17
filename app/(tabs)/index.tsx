@@ -59,6 +59,7 @@ export default function TabOneScreen() {
           withAlphaFilter,
           onSelect,
           visible,
+          disableNativeModal: true,
         }}
         onClose={() => setVisible(false)}
       />
