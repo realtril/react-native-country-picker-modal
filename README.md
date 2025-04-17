@@ -106,6 +106,7 @@ export default function App() {
 
 ## Props
 
+<<<<<<< Updated upstream
 - `countryCode`: [CountryCode](https://github.com/xcarpentier/react-native-country-picker-modal/blob/master/src/types.ts#L252)
 - `region?`:[Region](https://github.com/xcarpentier/react-native-country-picker-modal/blob/master/src/types.ts#L272)
 - `subregion?`: [Subregion](https://github.com/xcarpentier/react-native-country-picker-modal/blob/master/src/types.ts#L282)
@@ -139,6 +140,34 @@ export default function App() {
 - `closeButtonImageStyle?`: StyleProp<ImageStyle>
 - `disableNativeModal?`: boolean (you have to wrap your all app with CountryModalProvider)
 - `preferredCountries`: [CountryCode](https://github.com/xcarpentier/react-native-country-picker-modal/blob/master/src/types.ts#L254) preferred countries they appear first (`withAlphaFilter` must be false)
+=======
+| Key                        | Type                                         | Default           | Description                                                                                 |
+| -------------------------- | -------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------- |
+| countryCode                | CountryCode                                  | \*required        | The ISO 3166-1 alpha-2 code of the current selected country                               |
+| translation                | TranslationLanguageCode                      | 'common'          | The translation language to use for country names                                         |
+| region                     | Region                                       | null              | Limit results to a specific region                                                        |
+| subregion                  | Subregion                                    | null              | Limit results to a specific subregion                                                     |
+| countryCodes               | CountryCode[]                                | null              | List of custom country codes to render                                                    |
+| excludeCountries           | CountryCode[]                                | null              | List of countries to exclude                                                              |
+| includeCountries           | CountryCode[]                                | null              | List of countries to include (all others will be excluded)                                |
+| preferredCountries         | CountryCode[]                                | null              | List of countries at the top of the list                                                  |
+| theme                      | Object                                       | null              | Theme for customizing the appearance                                                      |
+| onSelect                   | (country: Country) => void                   | \*required        | Callback when a country is selected                                                       |
+| onClose                    | () => void                                   | \*required        | Callback when the modal is closed                                                         |
+| visible                    | boolean                                      | false             | Show/hide the modal                                                                       |
+| withFilter                 | boolean                                      | true              | Enable search bar                                                                         |
+| withFlag                   | boolean                                      | true              | Show flags for each country                                                               |
+| withEmoji                  | boolean                                      | true              | Use emoji flags for each country                                                          |
+| withAlphaFilter            | boolean                                      | false             | Show alphabet filter bar                                                                  |
+| withCallingCode            | boolean                                      | false             | Show calling code for each country                                                        |
+| withCurrency               | boolean                                      | false             | Show currency for each country                                                            |
+| withModal                  | boolean                                      | true              | Use a modal instead of a bottom sheet                                                     |
+| disableNativeModal         | boolean                                      | false             | Disables the native modal and uses a custom one                                           |
+| flatListProps              | FlatListProps<Country>                       | null              | Additional props for the country list                                                     |
+| filterProps                | CountryFilterProps                           | null              | Additional props for the search bar                                                       |
+| modalProps                 | ModalProps                                   | null              | Additional props for the modal                                                            |
+| containerButtonStyle       | StyleProp<ViewStyle>                         | null              | Style for the container button                                                            |
+>>>>>>> Stashed changes
 
 ## Dark theme example
 
