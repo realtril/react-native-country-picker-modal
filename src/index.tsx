@@ -44,24 +44,25 @@ interface Props {
   containerButtonStyle?: StyleProp<ViewStyle>
   renderFlagButton?(props: FlagButtonProps): ReactNode
   renderCountryFilter?(props: CountryFilterProps): ReactNode
-  onSelect(country: Country): void
+  onSelect?(country: Country): void
   onOpen?(): void
   onClose?(): void
 }
 
-const Main = ({ theme, translation, ...props }: Props) => {
+const Main = ({ 
+  theme, 
+  translation, 
+  onSelect = () => {}, 
+  withEmoji = true,
+  ...props 
+}: Props) => {
   return (
     <ThemeProvider theme={{ ...DEFAULT_THEME, ...theme }}>
       <CountryProvider value={{ ...DEFAULT_COUNTRY_CONTEXT, translation }}>
-        <CountryPicker {...props} />
+        <CountryPicker onSelect={onSelect} withEmoji={withEmoji} {...props} />
       </CountryProvider>
     </ThemeProvider>
   )
-}
-
-Main.defaultProps = {
-  onSelect: () => {},
-  withEmoji: true,
 }
 
 export default Main

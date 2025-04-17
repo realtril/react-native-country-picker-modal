@@ -8,13 +8,16 @@ import { CountryModalContext } from './CountryModalProvider'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingLeft: 16
   },
 })
 
 export const CountryModal = ({
   children,
-  withModal,
-  disableNativeModal,
+  animationType = 'slide',
+  animated = true,
+  withModal = true,
+  disableNativeModal = false,
   ...props
 }: ModalProps & {
   children: React.ReactNode
@@ -43,11 +46,4 @@ export const CountryModal = ({
     return <Modal {...props}>{content}</Modal>
   }
   return content
-}
-
-CountryModal.defaultProps = {
-  animationType: 'slide',
-  animated: true,
-  withModal: true,
-  disableNativeModal: false,
 }

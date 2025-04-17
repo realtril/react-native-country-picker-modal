@@ -337,3 +337,14 @@ export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export const isCountryCode = (str: string): str is CountryCode => {
   return CountryCodeList.some((code) => code === str)
 }
+
+export interface Props {
+  placeholder?: string;
+  countryCode: CountryCode;
+  region?: Region;
+  subregion?: Subregion;
+  countryCodes?: CountryCode[];
+  excludeCountries?: CountryCode[];
+  includeCountries?: CountryCode[];
+  preferredCountries?: CountryCode[];
+}

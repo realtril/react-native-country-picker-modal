@@ -44,7 +44,12 @@ export const loadDataAsync = (
           break
         default:
           if (!data.emojiCountries) {
-            data.emojiCountries = require('./assets/data/countries-emoji.json')
+            try {
+              data.emojiCountries = require('./assets/data/countries-emoji.json')
+            } catch (error) {
+              // Fallback to direct path if the relative path doesn't work
+              data.emojiCountries = require('../src/assets/data/countries-emoji.json')
+            }
             resolve(data.emojiCountries!)
           } else {
             resolve(data.emojiCountries)
@@ -80,9 +85,13 @@ export const getCountryNameAsync = async (
     throw new Error('Unable to find image because imageCountries is undefined')
   }
 
-  return countries[countryCode].name
-    ? (countries[countryCode].name as TranslationLanguageCodeMap)[translation]
-    : (countries[countryCode].name as TranslationLanguageCodeMap)['common']
+  const name = countries[countryCode].name
+  if (typeof name === 'string') {
+    return name
+  }
+  // Type assertion to TranslationLanguageCodeMap
+  const nameMap = name as TranslationLanguageCodeMap
+  return nameMap[translation] || nameMap['common']
 }
 
 export const getCountryCallingCodeAsync = async (countryCode: CountryCode) => {
@@ -131,6 +140,7 @@ export const getCountriesAsync = async (
   excludeCountries?: CountryCode[],
   preferredCountries?: CountryCode[],
   withAlphaFilter?: boolean,
+  includeCountries?: CountryCode[],
 ): Promise<Country[]> => {
   const countriesRaw = await loadDataAsync(flagType)
   if (!countriesRaw) {
@@ -145,42 +155,56 @@ export const getCountriesAsync = async (
 
     const countries = newCountryCodeList
       .filter(isCountryPresent(countriesRaw))
-      .map((cca2: CountryCode) => ({
-        ...{
+      .map((cca2: CountryCode) => {
+        const name = countriesRaw[cca2].name
+        let translatedName: string
+        if (typeof name === 'string') {
+          translatedName = name
+        } else {
+          // Type assertion to TranslationLanguageCodeMap
+          const nameMap = name as TranslationLanguageCodeMap
+          translatedName = nameMap[translation] || nameMap['common']
+        }
+        
+        return {
           ...countriesRaw[cca2],
-          name:
-            (countriesRaw[cca2].name as TranslationLanguageCodeMap)[
-              translation
-            ] ||
-            (countriesRaw[cca2].name as TranslationLanguageCodeMap)['common'],
-        },
-        cca2,
-      }))
+          name: translatedName,
+          cca2
+        }
+      })
       .filter(isRegion(region))
       .filter(isSubregion(subregion))
       .filter(isIncluded(countryCodes))
+      .filter(isIncluded(includeCountries))
       .filter(isExcluded(excludeCountries))
 
     return countries
   } else {
     const countries = CountryCodeList.filter(isCountryPresent(countriesRaw))
-      .map((cca2: CountryCode) => ({
-        ...{
+      .map((cca2: CountryCode) => {
+        const name = countriesRaw[cca2].name
+        let translatedName: string
+        if (typeof name === 'string') {
+          translatedName = name
+        } else {
+          // Type assertion to TranslationLanguageCodeMap
+          const nameMap = name as TranslationLanguageCodeMap
+          translatedName = nameMap[translation] || nameMap['common']
+        }
+        
+        return {
           ...countriesRaw[cca2],
-          name:
-            (countriesRaw[cca2].name as TranslationLanguageCodeMap)[
-              translation
-            ] ||
-            (countriesRaw[cca2].name as TranslationLanguageCodeMap)['common'],
-        },
-        cca2,
-      }))
+          name: translatedName,
+          cca2
+        }
+      })
       .filter(isRegion(region))
       .filter(isSubregion(subregion))
       .filter(isIncluded(countryCodes))
+      .filter(isIncluded(includeCountries))
       .filter(isExcluded(excludeCountries))
       .sort((country1: Country, country2: Country) =>
-        (country1.name as string).localeCompare(country2.name as string),
+        String(country1.name).localeCompare(String(country2.name))
       )
 
     return countries
@@ -196,17 +220,21 @@ const DEFAULT_FUSE_OPTION = {
   minMatchCharLength: 1,
   keys: ['name', 'cca2', 'callingCode'],
 }
-let fuse: Fuse<Country>
+
+// Fix Fuse type - using a simpler typing approach
+// @ts-ignore - Ignoring the Generic type error for Fuse
+let fuse: any
+
 export const search = (
   filter: string = '',
   data: Country[] = [],
-  options: Fuse.FuseOptions<Country> = DEFAULT_FUSE_OPTION,
+  options = DEFAULT_FUSE_OPTION,
 ) => {
   if (data.length === 0) {
     return []
   }
   if (!fuse) {
-    fuse = new Fuse<Country>(data, options)
+    fuse = new Fuse(data, options)
   }
   if (filter && filter !== '') {
     const result = fuse.search(filter)
@@ -215,15 +243,16 @@ export const search = (
     return data
   }
 }
+
 const uniq = (arr: string[]) => Array.from(new Set(arr))
 
 export const getLetters = (countries: Country[]) => {
   return uniq(
     countries
       .map((country: Country) =>
-        (country.name as string).substr(0, 1).toLocaleUpperCase(),
+        String(country.name).substr(0, 1).toLocaleUpperCase()
       )
-      .sort((l1: string, l2: string) => l1.localeCompare(l2)),
+      .sort((l1: string, l2: string) => l1.localeCompare(l2))
   )
 }
 

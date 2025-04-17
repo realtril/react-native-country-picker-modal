@@ -1,4 +1,4 @@
-import React, { useRef, memo, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import {
   StyleSheet,
   View,
@@ -21,8 +21,6 @@ const borderBottomWidth = 2 / PixelRatio.get()
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   letters: {
     flex: 1,
@@ -44,7 +42,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingHorizontal: 5,
+    paddingHorizontal: 16,
   },
   itemCountryName: {
     width: '90%',
@@ -89,16 +87,15 @@ interface CountryItemProps {
   withCurrency?: boolean
   onSelect(country: Country): void
 }
-const CountryItem = (props: CountryItemProps) => {
+const CountryItem = ({
+  country,
+  onSelect,
+  withFlag = true,
+  withEmoji,
+  withCallingCode = false,
+  withCurrency
+}: CountryItemProps) => {
   const { activeOpacity, itemHeight, flagSize } = useTheme()
-  const {
-    country,
-    onSelect,
-    withFlag,
-    withEmoji,
-    withCallingCode,
-    withCurrency,
-  } = props
   const extraContent: string[] = []
   if (
     withCallingCode &&
@@ -127,7 +124,15 @@ const CountryItem = (props: CountryItemProps) => {
           />
         )}
         <View style={styles.itemCountryName}>
-          <CountryText numberOfLines={2} ellipsizeMode='tail'>
+          <CountryText 
+            numberOfLines={2} 
+            ellipsizeMode='tail'
+            style={{
+              fontWeight: '500',
+              fontSize: 16,
+              lineHeight: 20,
+            }}
+          >
             {countryName}
             {extraContent.length > 0 && ` (${extraContent.join(', ')})`}
           </CountryText>
@@ -136,16 +141,11 @@ const CountryItem = (props: CountryItemProps) => {
     </TouchableOpacity>
   )
 }
-CountryItem.defaultProps = {
-  withFlag: true,
-  withCallingCode: false,
-}
-const MemoCountryItem = memo<CountryItemProps>(CountryItem)
 
 const renderItem =
   (props: Omit<CountryItemProps, 'country'>) =>
   ({ item: country }: ListRenderItemInfo<Country>) => (
-    <MemoCountryItem {...{ country, ...props }} />
+    <CountryItem {...{ country, ...props }} />
   )
 
 interface CountryListProps {
@@ -181,7 +181,7 @@ export const CountryList = (props: CountryListProps) => {
     onSelect,
     filter,
     flatListProps,
-    filterFocus,
+    filterFocus = undefined,
   } = props
 
   const flatListRef = useRef<FlatList<Country>>(null)
@@ -255,8 +255,4 @@ export const CountryList = (props: CountryListProps) => {
       )}
     </View>
   )
-}
-
-CountryList.defaultProps = {
-  filterFocus: undefined,
 }

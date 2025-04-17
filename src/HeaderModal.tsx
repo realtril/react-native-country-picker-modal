@@ -25,16 +25,16 @@ interface HeaderModalProps {
   onClose(): void
   renderFilter(props: HeaderModalProps): ReactNode
 }
-export const HeaderModal = (props: HeaderModalProps) => {
-  const {
-    withFilter,
-    withCloseButton,
-    closeButtonImage,
-    closeButtonStyle,
-    closeButtonImageStyle,
-    onClose,
-    renderFilter,
-  } = props
+export const HeaderModal = ({
+  withFilter,
+  withCloseButton = true,
+  closeButtonImage,
+  closeButtonStyle,
+  closeButtonImageStyle,
+  onClose,
+  renderFilter,
+  ...restProps
+}: HeaderModalProps) => {
   return (
     <View style={styles.container}>
       {withCloseButton && (
@@ -45,11 +45,16 @@ export const HeaderModal = (props: HeaderModalProps) => {
           onPress={() => onClose()}
         />
       )}
-      {withFilter && renderFilter(props)}
+      {withFilter && renderFilter({
+        withFilter,
+        withCloseButton,
+        closeButtonImage,
+        closeButtonStyle,
+        closeButtonImageStyle,
+        onClose,
+        renderFilter,
+        ...restProps
+      })}
     </View>
   )
-}
-
-HeaderModal.defaultProps = {
-  withCloseButton: true,
 }

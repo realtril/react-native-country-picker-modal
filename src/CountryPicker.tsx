@@ -55,6 +55,7 @@ interface CountryPickerProps {
   subregion?: Subregion
   countryCodes?: CountryCode[]
   excludeCountries?: CountryCode[]
+  includeCountries?: CountryCode[]
   preferredCountries?: CountryCode[]
   modalProps?: ModalProps
   filterProps?: CountryFilterProps
@@ -83,13 +84,13 @@ interface CountryPickerProps {
     props: React.ComponentProps<typeof CountryFilter>,
   ): ReactNode
   onSelect(country: Country): void
-  onOpen?(): void
-  onClose?(): void
+  onOpen?: () => void
+  onClose?: () => void
 }
 
 export const CountryPicker = (props: CountryPickerProps) => {
   const {
-    allowFontScaling,
+    allowFontScaling = true,
     countryCode,
     region,
     subregion,
@@ -107,11 +108,11 @@ export const CountryPicker = (props: CountryPickerProps) => {
     withCallingCodeButton,
     withCurrencyButton,
     containerButtonStyle,
-    withAlphaFilter,
-    withCallingCode,
+    withAlphaFilter = false,
+    withCallingCode = false,
     withCurrency,
     withFlag,
-    withModal,
+    withModal = true,
     disableNativeModal,
     withFlagButton,
     onClose: handleClose,
@@ -120,8 +121,9 @@ export const CountryPicker = (props: CountryPickerProps) => {
     closeButtonStyle,
     closeButtonImageStyle,
     excludeCountries,
-    placeholder,
+    placeholder = 'Select a country',
     preferredCountries,
+    includeCountries,
   } = props
   const [state, setState] = useState<State>({
     visible: props.visible || false,
@@ -185,6 +187,7 @@ export const CountryPicker = (props: CountryPickerProps) => {
       excludeCountries,
       preferredCountries,
       withAlphaFilter,
+      includeCountries
     )
       .then((countries) => (cancel ? null : setCountries(countries)))
       .catch(console.warn)
@@ -242,12 +245,4 @@ export const CountryPicker = (props: CountryPickerProps) => {
       </CountryModal>
     </>
   )
-}
-
-CountryPicker.defaultProps = {
-  withModal: true,
-  withAlphaFilter: false,
-  withCallingCode: false,
-  placeholder: 'Select Country',
-  allowFontScaling: true,
 }
