@@ -1,6 +1,7 @@
 {
   "name": "@realtril/react-native-country-picker-modal",
-  "main": "expo-router/entry",
+  "main": "src/index.tsx",
+  "types": "src/index.tsx",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
@@ -24,6 +25,7 @@
     "@expo/vector-icons": "^14.0.2",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
+    "@realtril/react-native-country-picker-modal": "./",
     "expo": "~52.0.46",
     "expo-blur": "~14.0.3",
     "expo-constants": "~17.0.8",

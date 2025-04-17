@@ -2,16 +2,23 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "baseUrl": ".",
+    "declaration": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ],
+      "@realtril/react-native-country-picker-modal": ["./src/index.tsx"]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "expo-env.d.ts",
+    "app.d.ts"
   ]
 }
