@@ -13,6 +13,7 @@ export const DEFAULT_THEME = {
     android: 'Roboto',
     web: 'Arial'
   }),
+  fontWeight: '500',
   filterPlaceholderTextColor: '#aaa',
   activeOpacity: 0.5,
   itemHeight: getHeightPercent(7),
