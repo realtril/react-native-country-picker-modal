@@ -223,6 +223,7 @@ export const CountryPicker = (props: CountryPickerProps) => {
               value: filter,
               onFocus,
               onBlur,
+              placeholder,
               ...filterProps,
             })
           }
