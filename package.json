@@ -3,6 +3,10 @@
   "main": "src/index.tsx",
   "types": "src/index.tsx",
   "version": "1.0.10",
+  "files": [
+    "src",
+    "assets"
+  ],
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",

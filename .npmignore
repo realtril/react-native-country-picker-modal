@@ -17,8 +17,6 @@ scripts
 babel.config.js
 metro.config.js
 scripts/
-src/
-data/
 App.tsx
 tsconfig.json
 tslint.json
