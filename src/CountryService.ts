@@ -44,12 +44,7 @@ export const loadDataAsync = (
           break
         default:
           if (!data.emojiCountries) {
-            try {
-              data.emojiCountries = require('./assets/data/countries-emoji.json')
-            } catch (error) {
-              // Fallback to direct path if the relative path doesn't work
-              data.emojiCountries = require('../src/assets/data/countries-emoji.json')
-            }
+            data.emojiCountries = require('./assets/data/countries-emoji.json')
             resolve(data.emojiCountries!)
           } else {
             resolve(data.emojiCountries)
