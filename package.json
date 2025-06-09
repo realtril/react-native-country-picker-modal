@@ -2,10 +2,12 @@
   "name": "@realtril/react-native-country-picker-modal",
   "main": "src/index.tsx",
   "types": "src/index.tsx",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "files": [
     "src",
-    "assets"
+    "src/assets",
+    "src/assets/data",
+    "src/assets/images"
   ],
   "scripts": {
     "start": "expo start",
