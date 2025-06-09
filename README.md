@@ -1,13 +1,13 @@
 # React Native Country Picker Modal
 
-A React Native country picker modal updated for Expo 52 and React Native 0.76.x.
+A React Native country picker modal updated for Expo 53 and React Native 0.79.x.
 
 This is a migrated version of the popular [react-native-country-picker-modal](https://github.com/xcarpentier/react-native-country-picker-modal) library, updated to work with the latest versions of Expo and React Native.
 
 ## Features
 
-- 🎨 Uses React Native Expo (SDK 52)
-- ⚛️ Compatible with React Native 0.76.x
+- 🎨 Uses React Native Expo (SDK 53)
+- ⚛️ Compatible with React Native 0.79.x
 - 🏳️ Support for both emoji and regular flags
 - 📱 Native feeling with search and alphabetical index bar
 - 🔎 Fast and efficient search with fuzzy search
@@ -168,4 +168,4 @@ Feel free to [contact me](mailto:contact@xaviercarpentier.com) or [create an iss
 
 ## Hire an expert!
 
-Looking for a ReactNative freelance expert with more than 12 years experience? Contact me from my [website](https://xaviercarpentier.com)!
+Looking for a ReactNative freelance expert with more than 12 years experience? Contact me from my [website](https://xaviercarpentier.com)!
